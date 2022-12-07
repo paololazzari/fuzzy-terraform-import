@@ -1,0 +1,7 @@
+Add support for:
+
+- aws_s3_bucket
+- aws_instance
+- aws_iam_role
+- aws_vpc
+- aws_subnet
