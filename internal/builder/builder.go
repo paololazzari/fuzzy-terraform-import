@@ -11,28 +11,45 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
+func newIAMRole(sess *session.Session) []map[string]interface{} {
+	svc := iam.New(sess)
+	return fuzzyiam.IAMRoleProperties(svc)
+}
+
+func newEC2Instance(sess *session.Session) []map[string]interface{} {
+	svc := ec2.New(sess)
+	return fuzzyec2.EC2InstanceProperties(svc)
+}
+
+func newS3Bucket(sess *session.Session) []map[string]interface{} {
+	svc := s3.New(sess)
+	return fuzzys3.S3BucketProperties(svc)
+}
+
+func newEC2Subnet(sess *session.Session) []map[string]interface{} {
+	svc := ec2.New(sess)
+	return fuzzyec2.EC2SubnetProperties(svc)
+}
+
+func newEC2Vpc(sess *session.Session) []map[string]interface{} {
+	svc := ec2.New(sess)
+	return fuzzyec2.EC2VPCProperties(svc)
+}
+
+var objectsMap = map[string]interface{}{
+	"aws_iam_role": newIAMRole,
+	"aws_instance": newEC2Instance,
+	"aws_bucket":   newS3Bucket,
+	"aws_subnet":   newEC2Instance,
+	"aws_vpc":      newEC2Vpc,
+}
+
 func GetObjects(resourceName string, sess *session.Session) ([]map[string]interface{}, bool) {
-	switch resourceName {
-	case "aws_iam_role":
-		svc := iam.New(sess)
-		resourceIds := fuzzyiam.IAMRoleProperties(svc)
+	if objectsMap[resourceName] != nil {
+		f := objectsMap[resourceName].(func(sess *session.Session) []map[string]interface{})
+		resourceIds := f(sess)
 		return resourceIds, true
-	case "aws_instance":
-		svc := ec2.New(sess)
-		resourceIds := fuzzyec2.EC2InstanceProperties(svc)
-		return resourceIds, true
-	case "aws_s3_bucket":
-		svc := s3.New(sess)
-		resourceIds := fuzzys3.S3BucketProperties(svc)
-		return resourceIds, true
-	case "aws_subnet":
-		svc := ec2.New(sess)
-		resourceIds := fuzzyec2.EC2SubnetProperties(svc)
-		return resourceIds, true
-	case "aws_vpc":
-		svc := ec2.New(sess)
-		resourceIds := fuzzyec2.EC2VPCProperties(svc)
-		return resourceIds, true
+	} else {
+		return nil, false
 	}
-	return nil, false
 }
