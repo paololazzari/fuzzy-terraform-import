@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 )
 
-// Get properties for elastic ips
+// Get properties for keys
 func EC2KeysProperties(svc *ec2.EC2) []map[string]interface{} {
 
 	properties := []map[string]interface{}{}

@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 )
 
-// Get properties for elastic ips
+// Get properties for launch templates
 func EC2LaunchTemplateProperties(svc *ec2.EC2) []map[string]interface{} {
 
 	properties := []map[string]interface{}{}
@@ -33,8 +33,8 @@ func EC2LaunchTemplateProperties(svc *ec2.EC2) []map[string]interface{} {
 			obj["Id"] = aws.StringValue(template.LaunchTemplateId)
 			obj["Name"] = aws.StringValue(template.LaunchTemplateName)
 			obj["CreatedBy"] = aws.StringValue(template.CreatedBy)
-			obj["DefaultVersionNumber"] = strconv.FormatInt(aws.Int64Value(template.DefaultVersionNumber),10)
-			obj["LatestVersionNumber"] = strconv.FormatInt(aws.Int64Value(template.LatestVersionNumber),10)
+			obj["DefaultVersionNumber"] = strconv.FormatInt(aws.Int64Value(template.DefaultVersionNumber), 10)
+			obj["LatestVersionNumber"] = strconv.FormatInt(aws.Int64Value(template.LatestVersionNumber), 10)
 			obj["Tags"] = FormatTags(template.Tags)
 
 			properties = append(properties, obj)
