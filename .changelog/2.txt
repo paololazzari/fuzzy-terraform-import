@@ -1,0 +1,6 @@
+Add support for:
+
+- aws_eip
+- aws_eip_association
+- aws_key_pair
+- aws_launch_template
