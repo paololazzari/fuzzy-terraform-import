@@ -12,7 +12,6 @@ import (
 func EC2InstanceProperties(svc *ec2.EC2) []map[string]interface{} {
 
 	properties := []map[string]interface{}{}
-	_ = properties
 
 	result, err := svc.DescribeInstances(nil)
 	if err != nil {

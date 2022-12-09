@@ -11,7 +11,6 @@ import (
 func S3BucketProperties(svc *s3.S3) []map[string]interface{} {
 
 	properties := []map[string]interface{}{}
-	_ = properties
 
 	result, err := svc.ListBuckets(nil)
 	if err != nil {

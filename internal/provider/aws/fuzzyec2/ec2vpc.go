@@ -12,7 +12,6 @@ import (
 func EC2VPCProperties(svc *ec2.EC2) []map[string]interface{} {
 
 	properties := []map[string]interface{}{}
-	_ = properties
 
 	result, err := svc.DescribeVpcs(nil)
 	if err != nil {

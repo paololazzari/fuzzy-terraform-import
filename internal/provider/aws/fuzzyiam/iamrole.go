@@ -11,7 +11,6 @@ import (
 func IAMRoleProperties(svc *iam.IAM) []map[string]interface{} {
 
 	properties := []map[string]interface{}{}
-	_ = properties
 
 	result, err := svc.ListRoles(nil)
 	if err != nil {
