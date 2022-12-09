@@ -26,7 +26,7 @@ func getTerraformResourcesToImport(working_dir string) *tfconfig.Module {
 	_ = (*module).ManagedResources
 	var cmd strings.Builder
 	cmd.WriteString("terraform state list")
-	stdout, _, err := Shellout(cmd.String(), true)
+	stdout, _, err := shellout(cmd.String(), true)
 	if err != nil {
 		fmt.Printf("No terraform state found\n")
 		os.Exit(1)
@@ -85,8 +85,8 @@ func fuzzyMenu(r []any) string {
 	return name.String()
 }
 
-// execute the given command in a bash shell
-func Shellout(command string, silent bool) (string, string, error) {
+// execute the given command in either bash or powershell depending on the detected os
+func shellout(command string, silent bool) (string, string, error) {
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 	cmd := &exec.Cmd{}
@@ -141,7 +141,7 @@ func main() {
 				cmd.WriteString(tfImportCommand)
 				cmd.WriteString(fuzzyMenu(structs))
 				fmt.Printf("Executing: %s\n", cmd.String())
-				Shellout(cmd.String(), false)
+				shellout(cmd.String(), false)
 				break
 			} else if input == "n" {
 				break
