@@ -6,11 +6,13 @@ require (
 	github.com/aws/aws-sdk-go v1.44.150
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20221020162138-81db043ad408
 	github.com/ktr0731/go-fuzzyfinder v0.7.0
+	github.com/stretchr/testify v1.2.2
 )
 
 require (
 	github.com/agext/levenshtein v1.2.2 // indirect
 	github.com/apparentlymart/go-textseg v1.0.0 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gdamore/encoding v1.0.0 // indirect
 	github.com/gdamore/tcell/v2 v2.5.3 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
@@ -23,6 +25,7 @@ require (
 	github.com/mitchellh/go-wordwrap v1.0.0 // indirect
 	github.com/nsf/termbox-go v1.1.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.4.2 // indirect
 	github.com/zclconf/go-cty v1.1.0 // indirect
 	golang.org/x/sys v0.1.0 // indirect
