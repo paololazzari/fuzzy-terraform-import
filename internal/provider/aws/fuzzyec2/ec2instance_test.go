@@ -1,4 +1,4 @@
-package fuzzys3_test
+package fuzzyec2_test
 
 import (
 	"fmt"
@@ -7,12 +7,12 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/paololazzari/fuzzy-terraform-import/internal/provider/aws/fuzzys3"
+	"github.com/aws/aws-sdk-go/service/ec2"
+	"github.com/paololazzari/fuzzy-terraform-import/internal/provider/aws/fuzzyec2"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestS3BucketProperties(t *testing.T) {
+func TestEC2InstanceProperties(t *testing.T) {
 	region := "us-east-1"
 	profile := "local"
 
@@ -25,14 +25,14 @@ func TestS3BucketProperties(t *testing.T) {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	svc := s3.New(sess, aws.NewConfig().WithEndpoint(("http://localhost:5000")))
-	obj := fuzzys3.S3BucketProperties(svc)
+	svc := ec2.New(sess, aws.NewConfig().WithEndpoint(("http://localhost:5000")))
+	obj := fuzzyec2.EC2InstanceProperties(svc)
 	assert := assert.New(t)
 	obj_exists := assert.NotEqual(len(obj), 0)
 	if obj_exists == false {
 		fmt.Printf("No object was found")
 		os.Exit(1)
 	}
-	assert.NotEmpty(obj[0]["Name"], "Name should not be empty")
-	assert.NotEmpty(obj[0]["CreationDate"], "CreationDate should not be empty")
+	assert.NotEmpty(obj[0]["Id"], "Id should not be empty")
+	assert.NotEmpty(obj[0]["Type"], "Type should not be empty")
 }

@@ -10,3 +10,5 @@ ec2 =
     endpoint_url = http://localhost:5000/
 s3 =
     endpoint_url = http://localhost:5000/
+iam =
+    endpoint_url = http://localhost:5000/

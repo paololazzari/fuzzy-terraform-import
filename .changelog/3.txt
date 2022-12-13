@@ -1,0 +1,5 @@
+Add support for:
+
+- aws_placement_group
+- aws_ec2_availability_zone_group
+
