@@ -57,12 +57,12 @@ func fuzzyMenu(r []any) string {
 		r,
 		func(i int) string {
 			// resource must have either Name or Id as a property
-			name := reflect.ValueOf(r[i]).FieldByName("Name")
-			if !name.IsValid() {
-				id := reflect.ValueOf(r[i]).FieldByName("Id").String()
-				return id
+			id := reflect.ValueOf(r[i]).FieldByName("Id")
+			if !id.IsValid() {
+				name := reflect.ValueOf(r[i]).FieldByName("Name")
+				return name.String()
 			}
-			return name.String()
+			return id.String()
 		},
 		fuzzyfinder.WithPreviewWindow(func(i, w, h int) string {
 			if i == -1 {
@@ -77,12 +77,12 @@ func fuzzyMenu(r []any) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	name := reflect.ValueOf(r[idx]).FieldByName("Name")
-	if !name.IsValid() {
-		id := reflect.ValueOf(r[idx]).FieldByName("Id").String()
-		return id
+	id := reflect.ValueOf(r[idx]).FieldByName("Id")
+	if !id.IsValid() {
+		name := reflect.ValueOf(r[idx]).FieldByName("Name")
+		return name.String()
 	}
-	return name.String()
+	return id.String()
 }
 
 // execute the given command in either bash or powershell depending on the detected os
